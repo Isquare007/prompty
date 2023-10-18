@@ -63,9 +63,14 @@ const Nav = () => {
         ) : pathname === "/login" || pathname === '/register' ? (
           <></>
         ) : (
-          <Link className="black_btn" href="/login">
+          <div className="flex">
+          <Link className="black_btn mr-2" href="/login">
             Sign In
           </Link>
+          <Link className="outline_btn ml-2" href="/register">
+          Sign Up
+        </Link>
+        </div>
         )}
       </div>
 

@@ -2,10 +2,12 @@
 
 import React, { FormEvent, useEffect, useState } from "react";
 import { signIn, getProviders, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const { data: session } = useSession();
   const [providers, setProviders] = useState<Record<string, any> | null>(null);
+  const router = useRouter()
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -18,11 +20,11 @@ const RegisterForm = () => {
   }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault;
+    e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
-    const response = await fetch("/api/auth/register", {
+    const res  = await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({
         username: formData.get("username"),
@@ -30,6 +32,9 @@ const RegisterForm = () => {
         password: formData.get("password"),
       }),
     });
+    if (res.ok) {
+      router.push('/')
+    }
   };
   return (
     <section>
@@ -39,7 +44,7 @@ const RegisterForm = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm ">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label
                 htmlFor="username"
