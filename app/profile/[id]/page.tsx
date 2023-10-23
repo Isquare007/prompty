@@ -41,7 +41,7 @@ const ProfilePage = ({ params }) => {
   ) : (
     <div>
       <Profile
-        name={`${name}'s`}
+        name={name}
         desc={`Welcome to ${name}'s personalized profile page. Explore ${name}'s exceptional prompts and be inspired by the power of their imagination`}
         data={posts}
       />

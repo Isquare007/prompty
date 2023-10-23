@@ -1,13 +1,13 @@
 "use client";
 
 import React, { FormEvent, useEffect, useState } from "react";
-import { signIn, getProviders, useSession } from "next-auth/react";
+import { signIn, getProviders, useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const { data: session } = useSession();
   const [providers, setProviders] = useState<Record<string, any> | null>(null);
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -24,26 +24,24 @@ const RegisterForm = () => {
 
     const formData = new FormData(e.currentTarget);
 
-    try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify({
-          username: formData.get("username"),
-          email: formData.get("email"),
-          password: formData.get("password"),
-        }),
+    const res  = await fetch("/api/auth/register", {
+      method: "POST",
+      body: JSON.stringify({
+        username: formData.get("username"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+      }),
+    });
+    if (res.ok) {
+      await signIn('credentials', {
+        email: formData.get("email"),
+        password: formData.get("password"),
+        redirect: false,
       });
 
-      if (response.ok) {
-        // Registration was successful, redirect the user
-        router.push("/");
-      } else {
-        // const data = await response.json();
-        // setError(data.message);
-      }
-    } catch (error) {
-      console.error("Registration error:", error);
-      // Handle any unexpected errors and display an error message
+      // Redirect the user to the homepage
+      router.push("/");
+      router.refresh();
     }
   };
   return (

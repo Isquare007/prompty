@@ -66,14 +66,13 @@ const handler = NextAuth({
       const sessionUser = await User.findOne({
         email: session.user.email,
       });
-
+      session.user.name = sessionUser.username
       session.user.id = sessionUser._id.toString();
 
       return session;
     },
 
     async signIn({ user, account, profile }) {
-      console.log(user)
       if (account.provider === "google") {
         try {
           await connectToDB();
