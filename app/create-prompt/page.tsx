@@ -1,51 +1,41 @@
-"use client";
-
-import { useSession } from "next-auth/react";
+'use client'
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-
-import Form from "@components/Form";
+import HumanPrompt from "./human";
+import AI from "./ai";
+import "@styles/createStyle.css";
 
 const CreatePrompt = () => {
-  const router = useRouter();
-  const { data: session } = useSession();
-  const [submitting, setsubmitting] = useState(false);
-  const [post, setPost] = useState({
-    prompt: "",
-    tag: "",
-  });
 
-  const createPrompt = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setsubmitting(true);
+  const [outputType, setOutput] = useState("human");
 
-    try {
-      const response = await fetch("/api/prompt/new", {
-        method: "POST",
-        body: JSON.stringify({
-          prompt: post.prompt,
-          userId: session?.user?.id,
-          tag: post.tag,
-        }),
-      });
-      if (response.ok) {
-        router.push("/");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setsubmitting(false);
-    }
+  const setActive = (outputType) => {
+    setOutput(outputType);
   };
+
   return (
-    <Form
-      type="Create Post"
-      desc="Create and share amazing prompts with the world and let your imagination run wild with an AI-powered platform."
-      post={post}
-      setPost={setPost}
-      submitting={submitting}
-      handleSubmit={createPrompt}
-    />
+    <div className=" create-control p-2">
+        <button
+          type="button"
+          className={`text-center; p-2 ${
+            outputType === "human" ? "text-cyan-600" : "text-black-500"
+          }`}
+          onClick={() => setActive("human")}
+        >
+          Human Generated
+        </button>
+        <button
+          type="button"
+          className={`text-center; p-2 ${
+            outputType === "AI" ? "text-cyan-600" : "text-black-500"
+          }`}
+          onClick={() => setActive("AI")}
+        >
+          AI Generated
+        </button>
+
+
+      {outputType === "human" ? <HumanPrompt /> : <AI />}
+    </div>
   );
 };
 
