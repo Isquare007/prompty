@@ -22,10 +22,12 @@ const AI = () => {
     const formData = new FormData(e.currentTarget);
     try {
       const result = await PromptGenerator(formData.get("prompt-input"));
-      setPost({
-        ...post,
-        prompt: result,
-      });
+      if (result) {
+        setPost({
+          ...post,
+          prompt: result!,
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
