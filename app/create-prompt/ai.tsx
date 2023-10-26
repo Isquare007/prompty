@@ -22,7 +22,6 @@ const AI = () => {
     const formData = new FormData(e.currentTarget);
     try {
         const result = await PromptGenerator(formData.get('prompt-input'))
-        console.log(result)
         setPost({
             ...post,
             prompt: result,
