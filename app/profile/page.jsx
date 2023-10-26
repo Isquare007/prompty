@@ -10,7 +10,7 @@ import AccessDenied from "@components/access-denied";
 const ProfilePage = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [posts, setPosts] = useState<Array<{ _id: string }>>([]);
+  const [posts, setPosts] = useState([]);
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     const fetchPrompt = async () => {
@@ -31,11 +31,11 @@ const ProfilePage = () => {
     if (session?.user?.id) fetchPrompt();
   }, [session?.user?.id]);
   
-  const handleEdit = (post: { _id: string }) => {
+  const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
   
-  const handleDelete = async (post: { _id: string }) => {
+  const handleDelete = async (post) => {
     const hasConfirmed = window.confirm(
       "Are you sure you want to delete this post?"
       );
