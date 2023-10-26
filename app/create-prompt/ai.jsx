@@ -16,7 +16,8 @@ const AI = () => {
     tag: "",
   });
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
+    // : FormEvent<HTMLFormElement>
     e.preventDefault();
     setGenerating(true);
     const formData = new FormData(e.currentTarget);
@@ -25,7 +26,7 @@ const AI = () => {
       if (result) {
         setPost({
           ...post,
-          prompt: result!,
+          prompt: result,
         });
       }
     } catch (error) {
@@ -35,7 +36,8 @@ const AI = () => {
     }
   };
 
-  const savePrompt = async (e: React.FormEvent) => {
+  const savePrompt = async (e) => {
+    // : React.FormEvent
     e.preventDefault();
     setsubmitting(true);
 
