@@ -5,14 +5,21 @@ import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 import Spinner from "./Spinner/Spinner";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+interface PromptCardListProps {
+  data: Array<{ _id: string; creator: { username: string }; tag: string; prompt: string }>; 
+  handleTagClick: (tag: string) => void;
+}
+
+const PromptCardList: React.FC<PromptCardListProps> = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((post) => (
+      {data?.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
           handleTagClick={handleTagClick}
+          handleDelete={() => {}}
+          handleEdit={() => {}}
         />
       ))}
     </div>
@@ -20,14 +27,14 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
-  const [allPosts, setAllPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState<Array<{ _id: string; creator: { username: string }; tag: string; prompt: string }>>([]);
 
   const [isLoading, setLoading] = useState(true);
 
   // Search states
   const [searchText, setSearchText] = useState("");
-  const [searchTimeout, setSearchTimeout] = useState(null);
-  const [searchedResults, setSearchedResults] = useState([]);
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [searchedResults, setSearchedResults] = useState<Array<{ _id: string; creator: { username: string; }; tag: string; prompt: string; }>>([]);
 
   const fetchPosts = async () => {
     try {
@@ -46,7 +53,7 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  const filterPrompts = (searchtext) => {
+  const filterPrompts = (searchtext: string) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
     return allPosts.filter(
       (item) =>
@@ -56,10 +63,13 @@ const Feed = () => {
     );
   };
 
-  const handleSearchChange = (e) => {
-    clearTimeout(searchTimeout);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+  
     setSearchText(e.target.value);
-
+  
     // debounce method
     setSearchTimeout(
       setTimeout(() => {
@@ -68,8 +78,9 @@ const Feed = () => {
       }, 500)
     );
   };
+  
 
-  const handleTagClick = (tagName) => {
+  const handleTagClick = (tagName: string) => {
     setSearchText(tagName);
 
     const searchResult = filterPrompts(tagName);

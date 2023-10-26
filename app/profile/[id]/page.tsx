@@ -3,11 +3,16 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Profile from "@components/Profile";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Spinner from "@components/Spinner/Spinner";
 
-const ProfilePage = ({ params }) => {
-  const router = useRouter();
+interface ProfilePageProps {
+  params: {
+    id: string;
+  };
+}
+
+const ProfilePage: React.FC<ProfilePageProps> = ({ params }) => {
   const [posts, setPosts] = useState<Array<{ _id: string }>>([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -15,7 +20,6 @@ const ProfilePage = ({ params }) => {
 
   const userId = params?.id;
   const name = search.get("name");
-
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -41,8 +45,11 @@ const ProfilePage = ({ params }) => {
   ) : (
     <div>
       <Profile
-        name={name}
-        desc={`Welcome to ${name}'s personalized profile page. Explore ${name}'s exceptional prompts and be inspired by the power of their imagination`}
+        name={name || ""} // Use an empty string as a default when name is null
+        desc={`Welcome to ${
+          name || "your"
+        }'s personalized profile page. Explore their
+         exceptional prompts and be inspired by the power of their imagination`}
         data={posts}
       />
     </div>

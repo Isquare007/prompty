@@ -14,10 +14,11 @@ const HumanPrompt = () => {
     tag: "",
   });
 
-  const createPrompt = async (e: React.FormEvent) => {
+  const createPrompt = async (e) => {
     e.preventDefault();
     setsubmitting(true);
 
+    
     try {
       const response = await fetch("/api/prompt/new", {
         method: "POST",

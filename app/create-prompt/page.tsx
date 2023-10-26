@@ -8,7 +8,7 @@ const CreatePrompt = () => {
 
   const [outputType, setOutput] = useState("human");
 
-  const setActive = (outputType) => {
+  const setActive = (outputType: string) => {
     setOutput(outputType);
   };
 

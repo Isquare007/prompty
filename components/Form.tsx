@@ -1,6 +1,21 @@
 import Link from "next/link";
 
-const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
+interface Post {
+  prompt: string;
+  tag: string;
+}
+
+interface FormProps {
+  type: string;
+  desc: string;
+  post: Post;
+  setPost: React.Dispatch<React.SetStateAction<Post>>;
+  submitting: boolean;
+  handleSubmit: (e: React.FormEvent) => void;
+}
+
+
+const Form = ({ type, post, setPost, submitting, handleSubmit }: FormProps) => {
   return (
     <section className='w-full max-w-full flex-start flex-col'>
       <h1 className='head_text text-center'>

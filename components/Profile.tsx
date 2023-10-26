@@ -1,11 +1,11 @@
 import PromptCard from "./PromptCard";
 
 interface ProfileProps {
-  data: Array<{ _id: string }>;
-  name: string;
-  desc: string;
-  handleDelete: (post: { _id: string }) => void;
-  handleEdit: (post: { _id: string }) => void;
+  data?: Array<{ _id: string }>;
+  name?: string;
+  desc?: string;
+  handleDelete?: (post: { _id: string }) => void;
+  handleEdit?: (post: { _id: string }) => void;
 }
 
 const Profile = ({
@@ -22,12 +22,13 @@ const Profile = ({
       </h1>
       <p className="desc">{desc}</p>
       <div className="mt-16 prompt_layout">
-        {data.map((post) => (
+        {data?.map((post) => (
           <PromptCard
             key={post._id}
             post={post}
             handleEdit={() => handleEdit && handleEdit(post)}
-            handleDelete={() =>handleDelete && handleDelete(post)}
+            handleDelete={() => handleDelete && handleDelete(post)}
+            handleTagClick={() => {}}
           />
         ))}
       </div>
