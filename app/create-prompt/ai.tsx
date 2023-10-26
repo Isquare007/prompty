@@ -21,11 +21,11 @@ const AI = () => {
     setGenerating(true);
     const formData = new FormData(e.currentTarget);
     try {
-        const result = await PromptGenerator(formData.get('prompt-input'))
-        setPost({
-            ...post,
-            prompt: result,
-          });
+      const result = await PromptGenerator(formData.get("prompt-input"));
+      setPost({
+        ...post,
+        prompt: result,
+      });
     } catch (error) {
       console.log(error);
     } finally {
@@ -61,7 +61,8 @@ const AI = () => {
         <span className="blue_gradient">AI Generated Prompt</span>
       </h1>
       <p className="desc text-left max-w-md">
-        Generate and share amazing AI manipulated prompts with the world 
+        Share captivating prompts created by our AI on your chosen topics with
+        the world.
       </p>
       <form
         onSubmit={handleSubmit}
@@ -95,50 +96,50 @@ const AI = () => {
 
       <form
         onSubmit={savePrompt}
-        className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
+        className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
       >
         <label>
-          <span className='font-satoshi font-semibold text-base text-gray-700'>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
             Your AI Prompt
           </span>
 
           <textarea
             value={post.prompt}
             onChange={(e) => setPost({ ...post, prompt: e.target.value })}
-            placeholder='Write your post here'
+            placeholder="Write your post here"
             required
-            className='form_textarea '
+            className="form_textarea "
           />
         </label>
 
         <label>
-          <span className='font-satoshi font-semibold text-base text-gray-700'>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
             Field of Prompt{" "}
-            <span className='font-normal'>
+            <span className="font-normal">
               (#product, #webdevelopment, #idea, etc.)
             </span>
           </span>
           <input
             value={post.tag}
             onChange={(e) => setPost({ ...post, tag: e.target.value })}
-            type='text'
-            placeholder='#Tag'
+            type="text"
+            placeholder="#Tag"
             required
-            className='form_input'
+            className="form_input"
           />
         </label>
 
-        <div className='flex-center mx-3 mb-5 gap-4'>
-          <Link href='/' className='text-gray-500 text-sm mr-8'>
+        <div className="flex-center mx-3 mb-5 gap-4">
+          <Link href="/" className="text-gray-500 text-sm mr-8">
             Cancel
           </Link>
 
           <button
-            type='submit'
+            type="submit"
             disabled={submitting}
-            className='px-5 py-1.5 text-sm ml-8 bg-cyan-600 hover:bg-cyan-500 rounded-full text-white'
+            className="px-5 py-1.5 text-sm ml-8 bg-cyan-600 hover:bg-cyan-500 rounded-full text-white"
           >
-            {submitting ? 'creating': 'create'}
+            {submitting ? "creating" : "create"}
           </button>
         </div>
       </form>

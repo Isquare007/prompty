@@ -39,7 +39,7 @@ const HumanPrompt = () => {
   return (
     <Form
       type="Create"
-      desc="Create and share amazing prompts with the world and let your imagination run wild with an AI-powered platform."
+      desc="Publish your AI-generated prompts to the world and inspire others with your creativity!"
       post={post}
       setPost={setPost}
       submitting={submitting}
