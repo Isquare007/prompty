@@ -3,9 +3,6 @@ import OpenAI from "openai";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
-// const openai = new OpenAI({
-//   apiKey: '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', dangerouslyAllowBrowser: true,
-// });
 
 async function PromptGenerator(topic) {
   const prompt =
