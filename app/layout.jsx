@@ -8,12 +8,12 @@ export const metadata = {
   description: "Discover and Share AI and Human Generated Prompts",
 };
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = ({ children } ) => {
 
   return (
     <html lang="en">
       <body>
-        <Provider session={null}>
+        <Provider>
           <div className="main">
             <div className="gradient" />
           </div>
