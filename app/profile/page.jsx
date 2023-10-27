@@ -57,7 +57,6 @@ const ProfilePage = () => {
       }
     };
     
-    console.log(session?.user?.name)
     
     return isLoading ? (
       <Spinner />

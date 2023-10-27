@@ -95,7 +95,7 @@ const Nav = () => {
                   My profile
                 </Link>
                 <Link
-                  href={"/create-prompt"}
+                  href="/create-prompt"
                   className="dropdown_link"
                   onClick={() => setToggleDropdown(false)}
                 >
@@ -106,7 +106,7 @@ const Nav = () => {
                   className="mt-5 w-full black_btn"
                   onClick={() => {
                     setToggleDropdown(false);
-                    signOut;
+                    signOut();
                   }}
                 >
                   {" "}
@@ -115,20 +115,17 @@ const Nav = () => {
               </div>
             )}
           </div>
-        ) : (
-          <>
-            {providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
-                  className="black_btn"
-                >
-                  Sign In
-                </button>
-              ))}
-          </>
+        ) : pathname === "/login" || pathname === '/register' ? (
+          <></>
+        ) :(
+          <div className="flex">
+          <Link className="black_btn mr-2" href="/login">
+            Sign In
+          </Link>
+          <Link className="outline_btn ml-2" href="/register">
+          Sign Up
+        </Link>
+        </div>
         )}
       </div>
     </nav>
