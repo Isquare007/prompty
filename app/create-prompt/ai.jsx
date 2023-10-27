@@ -3,7 +3,6 @@
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import PromptGenerator from "@utils/promptGenerator";
 import Link from "next/link";
 
 const AI = () => {
@@ -22,11 +21,18 @@ const AI = () => {
     setGenerating(true);
     const formData = new FormData(e.currentTarget);
     try {
-      const result = await PromptGenerator(formData.get("prompt-input"));
-      if (result) {
+      const prompt = formData.get("prompt-input")
+      const result = await fetch("api/prompt/ai", {
+        method: 'POST',
+        body: JSON.stringify({
+          topic: prompt
+        })
+      })
+      if (result.ok) {
+        const aiGen = await result.json()
         setPost({
           ...post,
-          prompt: result,
+          prompt: aiGen
         });
       }
     } catch (error) {
