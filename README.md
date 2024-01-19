@@ -1,12 +1,12 @@
 # Prompty: AI-Enhanced Prompt Generation and Sharing Platform
 
-## Prompty is an innovative web application built using Next.js, offering a unique platform for users to generate, share, and discover creative prompts. Utilizing AI, Prompty empowers users to create prompts based on specific topics or key phrases. The app features:
+### Prompty is an innovative web application built using Next.js, offering a unique platform for users to generate, share, and discover creative prompts. Utilizing AI, Prompty empowers users to create prompts based on specific topics or key phrases. The app features:
 
-## AI-Powered Prompt Generation: Generate engaging prompts using AI, tailored to user input.
-## User Authentication: Secure access with Google Auth and credential logins.
-## Interactive Sharing: Share and explore prompts across various topics and tags.
-## Advanced Search: Find prompts based on keywords, tags, or user profiles.
-## Prompty stands out as a creative application of AI in content generation, enhancing user creativity and engagement.
+AI-Powered Prompt Generation: Generate engaging prompts using AI, tailored to user input.
+User Authentication: Secure access with Google Auth and credential logins.
+Interactive Sharing: Share and explore prompts across various topics and tags.
+Advanced Search: Find prompts based on keywords, tags, or user profiles.
+Prompty stands out as a creative application of AI in content generation, enhancing user creativity and engagement.
 
 ## Getting Started
 
